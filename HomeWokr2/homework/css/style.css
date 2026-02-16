@@ -88,7 +88,8 @@
 }
 
 .padding-medium h2 {
-    text-align: center;
+    text-align: right;
+    color: lightskyblue;
 }
 
 .padding-medium ol {
@@ -135,10 +136,6 @@
 .gallery-container > li:nth-of-type(even) {
     background-color: rgb(104, 205, 252);
     color: #fff;
-}
-
-.padding-medium h2 {
-    text-align: right;
 }
 
 #contact_name,
