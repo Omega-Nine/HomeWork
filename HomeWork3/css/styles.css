@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #000;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: orange;
+}
+
+.burger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.post {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.post:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.post__image {
+    flex: 1;
+}
+
+.post__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.post__content {
+    flex: 1;
+    padding: 20px;
+}
+
+.post__content h2 {
+    margin: 0, 0, 10px;
+}
+
+.date {
+    display: block;
+    margin-top: 10px;
+    opacity: 0.6;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.news button {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.news button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.post:hover img {
+    transform: scale(1.05);
+}
