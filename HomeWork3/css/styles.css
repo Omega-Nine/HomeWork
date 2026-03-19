@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    background-color: #101725;
 }
 
 .header {
@@ -8,6 +9,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    background: #1e2a47;
+    color: #fff;
 }
 
 .logo {
@@ -21,15 +24,31 @@ body {
 }
 
 .menu a {
+    position: relative;
     text-decoration: none;
-    color: rgb(22, 43, 77);
-    padding: 10px 15px;
+    color: #fff;
+    padding: 15px 20px;
     transition: 0.3s;
+    z-index: 1;
 }
 
-.menu a:hover {
-    color: #000;
-    background-color: rgba(67, 145, 235, 0.692);
+.menu a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(255,255,255,0.1);
+    opacity: 0;
+    transition: 0.3s;
+    z-index: -1;
+}
+
+.menu a:hover::after {
+    opacity: 1;
 }
 
 .burger {
@@ -39,6 +58,8 @@ body {
 }
 
 .container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
@@ -47,8 +68,11 @@ body {
 
 .post {
     display: flex;
+    align-items: stretch;
     margin-bottom: 20px;
     transition: 0.3s;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 .post:hover {
@@ -63,6 +87,10 @@ body {
     flex: 1;
     position: relative;
     overflow: hidden;
+}
+
+.post__image, .post__content {
+    flex: 1;
 }
 
 .post__image::after {
@@ -114,11 +142,11 @@ body {
     left: 0;
     padding: 40px;
     width: 100%;
-
+    box-sizing: border-box;
     color: #fff;
     background: linear-gradient(
         to top,
-        rgba(0,0,0,0.7)
+        rgba(0,0,0,0.7),
         rgba(0,0,0,0.2),
         transparent
     )
@@ -193,7 +221,7 @@ body {
 
 .news button {
     margin-top: 10px;
-    padding: 10px;
+    padding: 10px 20px;
     border: 1px solid #000;
     background: transparent;
     cursor: pointer;
@@ -215,12 +243,6 @@ body {
     background: #1e2a47; 
     color: #fff;
     margin-top: 20px;
-}
-
-@media (max-width: 1400px) {
-    .container {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 @media (max-width: 768px) {
