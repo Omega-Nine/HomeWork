@@ -2,32 +2,47 @@ body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #101725;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .header {
+    background: #1e2a47;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-inner {
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background: #1e2a47;
-    color: #fff;
 }
-
 .logo {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 300;
+}
+
+.logo-light {
+    color: #fff;
+}
+.logo-accent {
+    color:#ff4c6d;
 }
 
 .menu {
     display: flex;
-    gap: 20px;
 }
 
 .menu a {
+    display: block;
     position: relative;
     text-decoration: none;
     color: #fff;
-    padding: 15px 20px;
+    padding:20px;
     transition: 0.3s;
     z-index: 1;
 }
@@ -41,7 +56,7 @@ body {
     right: 0;
     width: 100%;
     height: 100%;
-    background:rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.15);
     opacity: 0;
     transition: 0.3s;
     z-index: -1;
@@ -68,11 +83,7 @@ body {
 
 .post {
     display: flex;
-    align-items: stretch;
-    margin-bottom: 20px;
-    transition: 0.3s;
-    overflow: hidden;
-    border-radius: 4px;
+    min-height: 300px;
 }
 
 .post:hover {
@@ -84,13 +95,8 @@ body {
 }
 
 .post__image {
-    flex: 1;
     position: relative;
     overflow: hidden;
-}
-
-.post__image, .post__content {
-    flex: 1;
 }
 
 .post__image::after {
@@ -113,6 +119,7 @@ body {
 
 .post:last-child {
     position: relative;
+    height: 400px;
 }
 
 .post:last-child {
@@ -120,9 +127,19 @@ body {
     margin-bottom: 0;
 }
 
-.post:last-child .post__image img {
+.post:nth-child(even) .date {
+    left: 20px;
+    right: auto;
+}
+
+.post:last-child .post__image {
+    height: 100%;
     width: 100%;
-    height: 400px;
+}
+
+.post:last-child .post__image img {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -168,17 +185,22 @@ body {
     background-color: #daad86;
 }
 
+.post__image, .post__content {
+    flex: 0 0 50%;
+    width: 50%;
+}
+
 .post__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: 0.3s;
 }
 
 .post__content {
-    flex: 1;
-    padding: 20px;
     position: relative;
+    padding: 20px;
+    padding-top: 60px;
+    
 }
 
 .post__content h2 {
@@ -192,14 +214,16 @@ body {
     line-height: 1.6;
 }
 
+.posts {
+    display: flex;
+    flex-direction: column;
+}
+
 .date {
-    position: absolute;
     top: 20px;
     right: 20px;
     font-size: 24px;
     font-weight: 300;
-    display: block;
-    margin-top: 10px;
     opacity: 0.7;
 }
 
@@ -215,30 +239,53 @@ body {
     transition: 0.3s;
 }
 
+.news img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
 .news:hover {
     transform: translateY(-5px);
 }
 
 .news button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    background: transparent;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    position: relative;
+    border: none;
+    background: none;
+    padding: 0;
 
-.news button:hover {
-    background-color: #000;
-    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .post:hover img {
     transform: scale(1.05);
 }
 
+.news button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+
+    width: 100%;
+    height: 1px;
+    background: black;
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+}
+
+.news button:hover::after {
+    transform: scaleX(1);
+}
+
 .footer {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
     padding: 20px;
     background: #1e2a47; 
     color: #fff;
@@ -266,5 +313,48 @@ body {
 
     h2 {
         font-size: 18px;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .burger {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        order: 2;
+    }
+
+    .post {
+        order: 1;
+        flex-direction: column;
+    }
+
+    .post__image, .post__content {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .post__content h2 {
+        display: block;
+        padding-top: 20px;
+    }
+
+    .date {
+        display: block;
+        margin-top: 10px;
+        margin-left: 0;
     }
 }
