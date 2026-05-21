@@ -1,6 +1,6 @@
-function stringToNumber() {
-    return Number(arguments[0]);
-    
+function stringToNumber(string) {
+    return Number(string);
 }
 
-console.log(stringToNumber("js is working"));
+console.log(stringToNumber("444"));
+console.log(typeof stringToNumber("444"));
