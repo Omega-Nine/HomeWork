@@ -1,6 +1,6 @@
-function isFive(number) {
-    return number === 5;
+function isBigger(a, b) {
+    return a > b;
 }
 
-console.log(isFive(4));
-console.log(isFive(5));
+console.log(isBigger(4, 5));
+console.log(isBigger(6, 5));
