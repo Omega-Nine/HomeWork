@@ -24,3 +24,17 @@ function executeForEach(array, callback) {
 console.log(executeForEach([1, 2, 3], function(el) {
     console.log(el * 2);
 }));
+
+// Task 3
+function mapArray(array, callback) {
+    let result = [];
+    for(let i = 0; i < array.length; i++) {
+        let el = array[i];
+        result.push(callback(el));
+    }
+    return result;
+}
+
+console.log(mapArray([2, 5, 8], function(el) {
+    return Number(el) + 3;
+}));
