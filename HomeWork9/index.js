@@ -1,3 +1,4 @@
+// Task 1
 function convert(...values) {
 
     let result = [];
@@ -12,3 +13,14 @@ function convert(...values) {
 }
 
 console.log(convert("1", "2", "3", 4, 5, 6));
+
+// Task 2
+function executeForEach(array, callback) {
+    for(let i = 0; i < array.length; i++) {
+        callback(array[i]);
+    }
+}
+
+console.log(executeForEach([1, 2, 3], function(el) {
+    console.log(el * 2);
+}));
