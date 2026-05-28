@@ -26,15 +26,45 @@ console.log(executeForEach([1, 2, 3], function(el) {
 }));
 
 // Task 3
-function mapArray(array, callback) {
-    let result = [];
-    for(let i = 0; i < array.length; i++) {
-        let el = array[i];
-        result.push(callback(el));
-    }
-    return result;
-}
+//function mapArray(array, callback) {
+//    let result = [];
+//    for(let i = 0; i < array.length; i++) {
+//        let el = array[i];
+//        result.push(callback(el));
+//    }
+//    return result;
+//}
 
-console.log(mapArray([2, 5, 8], function(el) {
-    return Number(el) + 3;
-}));
+//console.log(mapArray([2, "5", 8], function(el) {
+//    return Number(el) + 3;
+//}));
+
+console.log(
+    [2, "5", 8].map(function(el) {
+        return Number(el) + 3;
+    })
+);
+
+// Task 4
+//function filterArray(array, callback) {
+//    let result = [];
+//    for(let i = 0; i < array.length; i++) {
+//        let el = array[i];
+//        if(callback(el)) {
+//            result.push(el);
+//        }
+//    }
+//    return result;
+//}
+
+//console.log(filterArray([2, 5, 8], function(el) {
+//    return el % 2 === 0;
+//}));
+
+console.log(
+    [2, 5, 8].filter(function(el) {
+        return el % 2 === 0;
+    })
+);
+
+// Task 5
