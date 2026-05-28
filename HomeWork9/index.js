@@ -68,3 +68,28 @@ console.log(
 );
 
 // Task 5
+function containsValue(array, value) {
+    for(let i = 0; i < array.length; i++) {
+        if (array[i] === value) {
+            return true;
+        }    
+    return false;   
+    }
+}
+
+console.log(containsValue([2, 5, 8], 2));
+console.log(containsValue([2, 5, 8], 4));
+
+// Task 6
+function flipOver(str) {
+    let result = "";
+    for(let i = str.length - 1; i >=0; i--) {
+        result = result + str[i];
+    }
+    return result;
+
+}
+
+console.log(flipOver('hey world'));
+
+//Task 7
