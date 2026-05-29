@@ -93,3 +93,21 @@ function flipOver(str) {
 console.log(flipOver('hey world'));
 
 //Task 7
+
+function makeListFromRange(array) {
+    let result = [];
+
+    let start = array[0];
+    let end = array[1];
+
+    for (let i = start; i <= end; i++) {
+        result.push(i);
+    }
+
+    return result;
+}
+
+console.log(makeListFromRange([2, 7]));
+
+//Task8
+
