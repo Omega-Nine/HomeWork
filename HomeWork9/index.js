@@ -111,3 +111,26 @@ console.log(makeListFromRange([2, 7]));
 
 //Task8
 
+function getArrayOfKeys(fruits, key) {
+    let result = [];
+    
+    for(let i = 0; i < fruits.length; i++) {
+        result.push(fruits[i][key])
+    }
+
+    return result;
+}
+
+console.log(
+    getArrayOfKeys(
+        [
+            { name: "apple" },
+            { name: "pineapple" }
+        ],
+        "name"
+    )
+);
+
+//Task9
+
+
