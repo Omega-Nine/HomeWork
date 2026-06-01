@@ -162,4 +162,17 @@ console.log(getPastDay(date, 1));
 console.log(getPastDay(date, 2));
 console.log(getPastDay(date, 365));
 
+//Task 11
 
+function formatDate(date) {
+    let year = date.getFullYear();
+    let month = String(date.getMonth() + 1).padStart(2, "0");
+    let day = String(date.getDate()).padStart(2, "0");
+    let hours = String(date.getHours()).padStart(2, "0");
+    let minute = String(date.getMinutes()).padStart(2, "0");
+
+    return year + "/" + month + "/" + day + " " + hours + ":" + minute;
+}
+
+console.log(formatDate(new Date('6/15/2019 09:15:00'))) // "2018/06/15 09:15"
+console.log(formatDate(new Date())) // "2020/04/07 12:56" // gets current local time
