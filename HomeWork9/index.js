@@ -109,7 +109,7 @@ function makeListFromRange(array) {
 
 console.log(makeListFromRange([2, 7]));
 
-//Task8
+//Task 8
 
 function getArrayOfKeys(fruits, key) {
     let result = [];
@@ -131,7 +131,7 @@ console.log(
     )
 )
 
-//Task9
+//Task 9
 
 function substitute(array) {
     let result = [];
@@ -148,3 +148,18 @@ function substitute(array) {
 }
 
 console.log(substitute([58, 14, 48, 12, 31, 19, 10]));
+
+//Task 10
+
+function getPastDay(date, days) {
+    let copy = new Date(date);
+    copy.setDate(copy.getDate() - days);
+    return copy.getDate();
+}
+const date = new Date(2020, 0, 2);
+
+console.log(getPastDay(date, 1));
+console.log(getPastDay(date, 2));
+console.log(getPastDay(date, 365));
+
+
