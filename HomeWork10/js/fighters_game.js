@@ -1,6 +1,6 @@
 // constructor Fighter
 
-function fighter({name, damage, hp, strength, agility}) {
+function Fighter({name, damage, hp, strength, agility}) {
     let _name = name;
     let _hp = hp;
     let _maxHp = hp;
@@ -9,7 +9,7 @@ function fighter({name, damage, hp, strength, agility}) {
     let _agility = agility;
 
     let _wins = 0;
-    let losses = 0;
+    let _losses = 0;
     
 
     this.getName = function() {
@@ -35,12 +35,13 @@ function fighter({name, damage, hp, strength, agility}) {
     // Attack
 
     this.attack = function(defender) {
-        const chance = Math.max(100 - (defender.getStrength() + defender.getAgility()), 1);
+        const defense = defender.getStrength() + defender.getAgility();
+        const chance = Math.max(100 - defense, 5);
 
         if(Math.random() * 100 < chance) {
-            defender.dealDamage = _damage;
+            defender.dealDamage(_damage);
 
-            console.log(`${_name} makes ${_damage} damage to ${defender.getName}`);
+            console.log(`${_name} makes ${_damage} damage to ${defender.getName()}`);
         } else {
             console.log(`${_name} attack missed!`);
         }
@@ -72,11 +73,14 @@ function fighter({name, damage, hp, strength, agility}) {
     this.logCombatHistory = function() {
         console.log(`Name: ${_name} Wins: ${_wins}, Losses: ${_losses}`);
     };
+}
 
     //Battle
     function battle(fighter1, fighter2) {
-        if(fighter1.getHealth() === 0 || fighter2.getHealth() === 0) 
-            console.log("Battle cannot be started. One fighter is dead.")
+        if(fighter1.getHealth() <= 0 || fighter2.getHealth() <= 0) {
+            console.log("Battle cannot be started. One fighter is dead.");
+        return;
+        }
 
         while(fighter1.getHealth() > 0 && fighter2.getHealth() > 0 ) {
 
@@ -85,7 +89,7 @@ function fighter({name, damage, hp, strength, agility}) {
             if(fighter2.getHealth() <= 0) {
                 fighter1.addWin();
                 fighter2.addLoss();
-                console.log(`${fighter2.getName()} wins!`);
+                console.log(`${fighter1.getName()} wins!`);
                 break;
 
             }
@@ -95,9 +99,9 @@ function fighter({name, damage, hp, strength, agility}) {
             if(fighter1.getHealth() <= 0) {
                 fighter2.addWin();
                 fighter1.addLoss();
-                console.log(`${fighter1.getName()} wins!`);
+                console.log(`${fighter2.getName()} wins!`);
                 break;
             }
         }
     }
-}
+
