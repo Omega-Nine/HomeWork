@@ -107,3 +107,7 @@ ul{
     -webkit-transition-delay: 100ms;
     transition-delay: 300ms;
 }
+
+.selected {
+  background-color: lightgray;
+}
