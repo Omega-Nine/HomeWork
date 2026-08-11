@@ -1,6 +1,8 @@
 const savedBooks = localStorage.getItem("books");
 const books = JSON.parse(savedBooks);
 
+const bookList = document.createElement("ul");
+
 books.forEach(function(item) {
     const li = document.createElement("li");
 
@@ -10,4 +12,7 @@ books.forEach(function(item) {
     editButton.textContent = "Edit";
 
     li.append(editButton);
+    bookList.append(li);
 });
+
+document.body.append(bookList);
