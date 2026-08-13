@@ -3,7 +3,32 @@ const books = JSON.parse(savedBooks);
 
 const bookList = document.createElement("ul");
 
+const dynamicSection = document.createElement("div");
+document.body.append(dynamicSection);
 
+function renderPreview(book) {
+    const bookName = document.createElement("h2");
+    bookName.textContent = book.bookname;
+
+    const previewSection = document.createElement("div");
+    previewSection.append(bookName);
+
+    const bookAuthor = document.createElement("p");
+    bookAuthor.textContent = book.author;
+    previewSection.append(bookAuthor);
+
+    const bookImage = document.createElement("img");
+    bookImage.src = book.image;
+    previewSection.append(bookImage);
+
+    const bookPlot = document.createElement("p");
+    bookPlot.textContent = book.plot;
+    previewSection.append(bookPlot);
+
+    dynamicSection.textContent = "";
+    dynamicSection.append(previewSection);
+
+};
 
 books.forEach(function(item) {
     const li = document.createElement("li");
@@ -27,24 +52,7 @@ books.forEach(function(item) {
         });
         console.log(selectedBook);
 
-        const bookName = document.createElement("h2");
-        bookName.textContent = selectedBook.bookname;
-
-        const previewSection = document.createElement("div");
-        previewSection.append(bookName);
-
-        const bookAuthor = document.createElement("p");
-        bookAuthor.textContent = selectedBook.author;
-        previewSection.append(bookAuthor);
-
-        const bookImage = document.createElement("img");
-        bookImage.src = selectedBook.image;
-        previewSection.append(bookImage);
-
-        const bookPlot = document.createElement("p");
-        bookPlot.textContent = selectedBook.plot;
-        previewSection.append(bookPlot);
-        document.body.append(previewSection);
+        renderPreview(selectedBook);
     });
 
     editButton.addEventListener("click", function(event) {
