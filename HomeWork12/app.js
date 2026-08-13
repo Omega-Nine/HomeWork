@@ -30,6 +30,39 @@ function renderPreview(book) {
 
 };
 
+function renderEdit(book) {
+    const editForm = document.createElement("form");
+    const nameInput = document.createElement("input");
+    nameInput.value = book.bookname;
+
+    const authorInput = document.createElement("input");
+    authorInput.value = book.author;
+
+    const imageInput = document.createElement("input");
+    imageInput.value = book.image;
+
+    const plotInput = document.createElement("textarea");
+    plotInput.value = book.plot;
+
+    editForm.append(nameInput, authorInput, imageInput, plotInput);
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+
+    editForm.append(saveButton, cancelButton);
+
+    editForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+    });
+
+    dynamicSection.textContent = "";
+    dynamicSection.append(editForm);
+
+}
+
 if(window.location.hash === "#preview") {
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
@@ -68,6 +101,8 @@ books.forEach(function(item) {
     editButton.addEventListener("click", function(event) {
         event.stopPropagation();
         history.pushState(null, "", `?id=${item.id}#edit`);
+
+        renderEdit(item);
 
     });
 });
