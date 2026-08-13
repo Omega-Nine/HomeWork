@@ -30,6 +30,16 @@ function renderPreview(book) {
 
 };
 
+if(window.location.hash === "#preview") {
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
+    const bookId = Number(id);
+    const selectedBook = books.find(function(book) {
+        return book.id === bookId;
+    });
+    renderPreview(selectedBook);
+};
+
 books.forEach(function(item) {
     const li = document.createElement("li");
 
