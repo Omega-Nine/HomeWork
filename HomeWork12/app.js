@@ -64,6 +64,8 @@ function renderEdit(book) {
         const updateBooks = JSON.stringify(books);
         localStorage.setItem("books", updateBooks);
 
+        renderBookList();
+
         history.pushState(null, "", `?id=${book.id}#preview`);
         renderPreview(book);
     });
@@ -83,47 +85,52 @@ if(window.location.hash === "#preview") {
     renderPreview(selectedBook);
 };
 
-books.forEach(function(item) {
-    const li = document.createElement("li");
+function renderBookList() {
+    bookList.textContent = "";
 
-    li.textContent = item.bookname;
+    books.forEach(function(item) {
+        const li = document.createElement("li");
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
+        li.textContent = item.bookname;
 
-    li.append(editButton);
-    bookList.append(li);
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
 
-    li.addEventListener("click", function() {
-        history.pushState(null, "", `?id=${item.id}#preview`);
+        li.append(editButton);
+        bookList.append(li);
 
-        const url = new URL(window.location.href);
-        const id = url.searchParams.get("id");
-        const bookId = Number(id);
-        const selectedBook = books.find(function(book) {
-            return book.id === bookId;
+        li.addEventListener("click", function() {
+            history.pushState(null, "", `?id=${item.id}#preview`);
+
+            const url = new URL(window.location.href);
+            const id = url.searchParams.get("id");
+            const bookId = Number(id);
+            const selectedBook = books.find(function(book) {
+                return book.id === bookId;
+            });
+            console.log(selectedBook);
+
+            renderPreview(selectedBook);
         });
-        console.log(selectedBook);
 
-        renderPreview(selectedBook);
+        editButton.addEventListener("click", function(event) {
+            event.stopPropagation();
+            history.pushState(null, "", `?id=${item.id}#edit`);
+
+            renderEdit(item);
+
+        });
     });
 
-    editButton.addEventListener("click", function(event) {
-        event.stopPropagation();
-        history.pushState(null, "", `?id=${item.id}#edit`);
+    const addButton = document.createElement("button");
+    addButton.textContent = "Add";
+    bookList.append(addButton);
 
-        renderEdit(item);
-
+    addButton.addEventListener("click", function() {
+        history.pushState(null, "", "#add")
     });
-});
+};
 
-const addButton = document.createElement("button");
-addButton.textContent = "Add";
-bookList.append(addButton);
-
-addButton.addEventListener("click", function() {
-    history.pushState(null, "", "#add")
-});
-
+renderBookList();
 document.body.append(bookList);
 
