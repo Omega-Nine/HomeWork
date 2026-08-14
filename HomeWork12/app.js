@@ -56,6 +56,16 @@ function renderEdit(book) {
 
     editForm.addEventListener("submit", function(event) {
         event.preventDefault();
+        book.bookname = nameInput.value;
+        book.author = authorInput.value;
+        book.image = imageInput.value;
+        book.plot = plotInput.value;
+
+        const updateBooks = JSON.stringify(books);
+        localStorage.setItem("books", updateBooks);
+
+        history.pushState(null, "", `?id=${book.id}#preview`);
+        renderPreview(book);
     });
 
     dynamicSection.textContent = "";

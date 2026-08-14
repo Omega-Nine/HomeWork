@@ -25,4 +25,9 @@ let arrayBooks = [
   },
 ];
 let serialObj = JSON.stringify(arrayBooks);
-localStorage.setItem("books", serialObj);
+
+if(localStorage.getItem("books") === null) {
+            localStorage.setItem("books", serialObj);
+};
+
+
