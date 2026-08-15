@@ -51,6 +51,12 @@ function renderEdit(book) {
 
     const cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancel";
+    cancelButton.type = "button";
+
+    cancelButton.addEventListener("click", function() {
+        history.pushState(null, "", `?id=${book.id}#preview`);
+        renderPreview(book);
+    });
 
     editForm.append(saveButton, cancelButton);
 
@@ -108,8 +114,7 @@ function renderBookList() {
             const selectedBook = books.find(function(book) {
                 return book.id === bookId;
             });
-            console.log(selectedBook);
-
+            
             renderPreview(selectedBook);
         });
 
