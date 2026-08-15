@@ -97,7 +97,9 @@ function renderBookList() {
     books.forEach(function(item) {
         const li = document.createElement("li");
 
-        li.textContent = item.bookname;
+        const spanNameBook = document.createElement("span");
+        spanNameBook.textContent = item.bookname;
+        li.append(spanNameBook);
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
@@ -105,7 +107,7 @@ function renderBookList() {
         li.append(editButton);
         bookList.append(li);
 
-        li.addEventListener("click", function() {
+        spanNameBook.addEventListener("click", function() {
             history.pushState(null, "", `?id=${item.id}#preview`);
 
             const url = new URL(window.location.href);
@@ -119,11 +121,8 @@ function renderBookList() {
         });
 
         editButton.addEventListener("click", function(event) {
-            event.stopPropagation();
             history.pushState(null, "", `?id=${item.id}#edit`);
-
             renderEdit(item);
-
         });
     });
 
