@@ -30,8 +30,60 @@ function renderPreview(book) {
 
 };
 
+function renderAdd() {
+    const addForm = document.createElement("form");
+    const nameInput = document.createElement("input");
+    const authorInput = document.createElement("input");
+    const imageInput = document.createElement("input");
+    const plotInput = document.createElement("textarea");
+
+    addForm.append(nameInput, authorInput, imageInput, plotInput);
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.type = "button";
+
+    cancelButton.addEventListener("click", function() {
+        history.back();
+    });
+
+    addForm.append(saveButton, cancelButton);
+
+    addForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const newBook = {
+            id: books.length,
+            bookname: nameInput.value,
+            author: authorInput.value,
+            image: imageInput.value,
+            plot: plotInput.value
+        };
+
+        books.push(newBook);
+        const updateBooks = JSON.stringify(books);
+        localStorage.setItem("books", updateBooks);
+        renderBookList();
+
+        history.pushState(null, "", `?id=${newBook.id}#preview`);
+        renderPreview(newBook);
+
+        setTimeout(function() {
+            alert("Book successfully added")
+        }, 300);
+    });
+
+    dynamicSection.textContent = "";
+    dynamicSection.append(addForm);
+
+};
+
 function renderEdit(book) {
     const editForm = document.createElement("form");
+
     const nameInput = document.createElement("input");
     nameInput.value = book.bookname;
 
@@ -54,8 +106,11 @@ function renderEdit(book) {
     cancelButton.type = "button";
 
     cancelButton.addEventListener("click", function() {
-        history.pushState(null, "", `?id=${book.id}#preview`);
-        renderPreview(book);
+        const isConfirmed = confirm("Discard changes");
+        if(isConfirmed === true) {
+            history.pushState(null, "", `?id=${book.id}#preview`);
+            renderPreview(book);
+        };
     });
 
     editForm.append(saveButton, cancelButton);
@@ -74,12 +129,16 @@ function renderEdit(book) {
 
         history.pushState(null, "", `?id=${book.id}#preview`);
         renderPreview(book);
+
+        setTimeout(function() {
+            alert("Book successfully updated");
+        }, 300);
     });
 
     dynamicSection.textContent = "";
     dynamicSection.append(editForm);
 
-}
+};
 
 if(window.location.hash === "#preview") {
     const url = new URL(window.location.href);
@@ -131,7 +190,8 @@ function renderBookList() {
     bookList.append(addButton);
 
     addButton.addEventListener("click", function() {
-        history.pushState(null, "", "#add")
+        history.pushState(null, "", "#add");
+        renderAdd();
     });
 };
 
