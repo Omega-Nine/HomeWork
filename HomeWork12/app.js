@@ -29,10 +29,18 @@ function renderPreview(book) {
 
 function renderAdd() {
     const addForm = document.createElement("form");
+
     const nameInput = document.createElement("input");
+    nameInput.required = true;
+
     const authorInput = document.createElement("input");
+    authorInput.required = true;
+
     const imageInput = document.createElement("input");
+    imageInput.required = true;
+    
     const plotInput = document.createElement("textarea");
+    plotInput.required = true;
 
     addForm.append(nameInput, authorInput, imageInput, plotInput);
 
@@ -83,15 +91,19 @@ function renderEdit(book) {
 
     const nameInput = document.createElement("input");
     nameInput.value = book.bookname;
+    nameInput.required = true;
 
     const authorInput = document.createElement("input");
     authorInput.value = book.author;
+    authorInput.required = true;
 
     const imageInput = document.createElement("input");
     imageInput.value = book.image;
+    imageInput.required = true;
 
     const plotInput = document.createElement("textarea");
     plotInput.value = book.plot;
+    plotInput.required = true;
 
     editForm.append(nameInput, authorInput, imageInput, plotInput);
 
@@ -138,6 +150,18 @@ function renderEdit(book) {
 };
 
 function router() {
+    if(window.location.hash !== "" &&
+       window.location.hash !== "#preview" && 
+       window.location.hash !== "#add" && 
+       window.location.hash !== "#edit") {
+        history.pushState(null, "", "index.html");
+        dynamicSection.textContent = "";
+    };
+
+    if(window.location.hash === "") {
+        dynamicSection.textContent = "";
+    };
+
     if(window.location.hash === "#add") {
         renderAdd();
     };
@@ -202,7 +226,7 @@ function renderBookList() {
             renderPreview(selectedBook);
         });
 
-        editButton.addEventListener("click", function(event) {
+        editButton.addEventListener("click", function() {
             history.pushState(null, "", `?id=${item.id}#edit`);
             renderEdit(item);
         });
