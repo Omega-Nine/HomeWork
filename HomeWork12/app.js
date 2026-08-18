@@ -11,19 +11,16 @@ function renderPreview(book) {
     bookName.textContent = book.bookname;
 
     const previewSection = document.createElement("div");
-    previewSection.append(bookName);
 
     const bookAuthor = document.createElement("p");
     bookAuthor.textContent = book.author;
-    previewSection.append(bookAuthor);
 
     const bookImage = document.createElement("img");
     bookImage.src = book.image;
-    previewSection.append(bookImage);
-
+    
     const bookPlot = document.createElement("p");
     bookPlot.textContent = book.plot;
-    previewSection.append(bookPlot);
+    previewSection.append(bookName, bookAuthor, bookImage, bookPlot);
 
     dynamicSection.textContent = "";
     dynamicSection.append(previewSection);
@@ -141,29 +138,33 @@ function renderEdit(book) {
 };
 
 function router() {
-    if(window.location.hash === "#preview") {
-        const url = new URL(window.location.href);
-        const id = url.searchParams.get("id");
-        const bookId = Number(id);
-        const selectedBook = books.find(function(book) {
-            return book.id === bookId;
-        });
-        renderPreview(selectedBook);
-    };
-
-    if(window.location.hash === "#edit") {
-        const url = new URL(window.location.href);
-        const id = url.searchParams.get("id");
-        const bookId = Number(id);
-        const selectedBook = books.find(function(book) {
-            return book.id === bookId;
-        });
-        renderEdit(selectedBook);
-    };
-
     if(window.location.hash === "#add") {
         renderAdd();
     };
+    
+    if(window.location.hash === "#preview" || window.location.hash === "#edit") {
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get("id");
+        const bookId = Number(id);
+        const selectedBook = books.find(function(book) {
+            return book.id === bookId;
+        });
+
+        if(selectedBook !== undefined) {
+            if(window.location.hash === "#preview") {
+                renderPreview(selectedBook);
+            } else {
+                renderEdit(selectedBook);
+            };
+        
+        } else{
+            alert("Шо ты натыкал голова ты утиная?!");
+            history.pushState(null, "", "index.html");
+            dynamicSection.textContent = "";
+            
+        };
+    };
+    
 };
 
 window.addEventListener("popstate", function() {
