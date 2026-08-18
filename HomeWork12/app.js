@@ -140,15 +140,37 @@ function renderEdit(book) {
 
 };
 
-if(window.location.hash === "#preview") {
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get("id");
-    const bookId = Number(id);
-    const selectedBook = books.find(function(book) {
-        return book.id === bookId;
-    });
-    renderPreview(selectedBook);
+function router() {
+    if(window.location.hash === "#preview") {
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get("id");
+        const bookId = Number(id);
+        const selectedBook = books.find(function(book) {
+            return book.id === bookId;
+        });
+        renderPreview(selectedBook);
+    };
+
+    if(window.location.hash === "#edit") {
+        const url = new URL(window.location.href);
+        const id = url.searchParams.get("id");
+        const bookId = Number(id);
+        const selectedBook = books.find(function(book) {
+            return book.id === bookId;
+        });
+        renderEdit(selectedBook);
+    };
+
+    if(window.location.hash === "#add") {
+        renderAdd();
+    };
 };
+
+window.addEventListener("popstate", function() {
+    router();
+});
+
+
 
 function renderBookList() {
     bookList.textContent = "";
@@ -196,5 +218,6 @@ function renderBookList() {
 };
 
 renderBookList();
+router();
 document.body.append(bookList);
 
