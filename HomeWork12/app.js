@@ -4,7 +4,13 @@ const books = JSON.parse(savedBooks);
 const bookList = document.createElement("ul");
 
 const dynamicSection = document.createElement("div");
-document.body.append(dynamicSection);
+
+const appContainer = document.createElement("div");
+appContainer.append(bookList, dynamicSection);
+
+appContainer.className = "container";
+bookList.className = "book-list";
+dynamicSection.className = "dynamic-section";
 
 function renderPreview(book) {
     const bookName = document.createElement("h2");
@@ -17,6 +23,7 @@ function renderPreview(book) {
 
     const bookImage = document.createElement("img");
     bookImage.src = book.image;
+    bookImage.className = "book-image";
     
     const bookPlot = document.createElement("p");
     bookPlot.textContent = book.plot;
@@ -29,6 +36,7 @@ function renderPreview(book) {
 
 function renderAdd() {
     const addForm = document.createElement("form");
+    addForm.className = "general-form";
 
     const nameInput = document.createElement("input");
     nameInput.required = true;
@@ -88,6 +96,7 @@ function renderAdd() {
 
 function renderEdit(book) {
     const editForm = document.createElement("form");
+    editForm.className = "general-form";
 
     const nameInput = document.createElement("input");
     nameInput.value = book.bookname;
@@ -209,6 +218,7 @@ function renderBookList() {
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
+        editButton.className = "edit-button";
 
         li.append(editButton);
         bookList.append(li);
@@ -244,5 +254,5 @@ function renderBookList() {
 
 renderBookList();
 router();
-document.body.append(bookList);
+document.body.append(appContainer);
 
