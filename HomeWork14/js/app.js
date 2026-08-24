@@ -21,9 +21,50 @@ function Student(name, email) {
     };
 };
 
-const student = new Student("Alex", "kusok@gmail.com");
-console.log(student.getName());
-console.log(student.getEmail());
-student.addHomeworkResult("HTML Basics", true);
-console.log(student.getHomeworkResults());
+function FrontendLab(students, failedLimit){
+    const failedHomeworksLimit = failedLimit;
+
+    const studentsList = students.map(function(student) {
+        return new Student(student.name, student.email);
+    });
+
+    this.printStudentsList = function() {
+        studentsList.forEach(function(student) {
+            console.log(student.getName(), student.getEmail(), student.getHomeworkResults());
+        })
+    };
+
+    this.addHomeworkResults = function(homeworkResults) {
+        homeworkResults.results.forEach(function(result) {
+            const student = studentsList.find(function(student) {
+                return student.getEmail() === result.email;
+            });
+
+            if(student !== undefined) {
+                student.addHomeworkResult(homeworkResults.topic, result.success);
+            }    
+        })
+    };
+
+    this.printStudentsEligibleForTest = function() {
+        studentsList.forEach(function(student) {
+            const failedHomeworks = student.getHomeworkResults().filter(function(homework) {
+                return homework.success === false;
+            });
+        
+        
+            if(failedHomeworks.length <= failedHomeworksLimit) {
+                console.log(student.getName(), student.getEmail());
+            }
+        })
+    };
+};
+
+const frontendLab = new FrontendLab(listOfStudents, 1);
+homeworkResults.forEach(function(homework) {
+    frontendLab.addHomeworkResults(homework);
+})
+
+frontendLab.printStudentsList();
+frontendLab.printStudentsEligibleForTest();
 
