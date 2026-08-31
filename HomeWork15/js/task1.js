@@ -1,4 +1,4 @@
-function assign(...items) {
+/*function assign(...items) {
     const target = items[0];
     items.slice(1).forEach(function(item) {
         for(const key in item) {
@@ -14,4 +14,4 @@ const paymentCard = {data: 27082026, name: "GOLOVA"};
 const result = assign({}, creditCard, paymentCard);
 console.log(result);
 console.log(creditCard);
-console.log(paymentCard);
+console.log(paymentCard);*/
