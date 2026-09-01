@@ -161,7 +161,7 @@ Motorcycle.prototype.checkSpeed = function() {
     }
 };
 
-const testVehicle = new Vehicle("white", "diesel");
+/*const testVehicle = new Vehicle("white", "diesel");
 
 testVehicle.drive();
 testVehicle.stop();
@@ -169,4 +169,51 @@ testVehicle.stop();
 setTimeout(() => {
     console.log("speed:", testVehicle.speed);
     console.log("isDriving:", testVehicle.isDriving);
-}, 3000);
+}, 3000);*/
+
+/*console.log("----- VEHICLE -----");
+
+const vehicle = new Vehicle("green", "diesel");
+
+console.log(vehicle.getInfo());
+
+vehicle.upgradeEngine("electric", 100);
+console.log(vehicle.getInfo());
+
+vehicle.drive();
+
+setTimeout(() => {
+    vehicle.stop();
+}, 5000);
+
+
+setTimeout(() => {
+    console.log("----- CAR -----");
+
+    const car = new Car("BMW", "black", "diesel");
+
+    console.log(car.getInfo());
+
+    car.changeColor("red");
+    console.log(car.getInfo());
+
+    car.changeColor("red");
+    console.log(car.getInfo());
+
+    car.drive();
+
+    setTimeout(() => {
+        car.stop();
+    }, 5000);
+}, 12000);
+
+
+setTimeout(() => {
+    console.log("----- MOTORCYCLE -----");
+
+    const motorcycle = new Motorcycle("Yamaha", "black", "petrol");
+
+    console.log(motorcycle.getInfo());
+
+    motorcycle.drive();
+}, 24000);*/
