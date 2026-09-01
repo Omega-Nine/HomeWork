@@ -45,6 +45,10 @@ Vehicle.prototype.drive = function() {
     }, 2000);
 };
 
+Vehicle.prototype.message = function() {
+    console.log(`Vehicle is stopped. Maximum speed during the drive was ${this.maxSpeedPerTrip}`);
+};
+
 Vehicle.prototype.stop = function() {
     if(this.speed === 0) {
         return;
@@ -67,14 +71,14 @@ Vehicle.prototype.stop = function() {
         if(this.speed === 0) {
             this.isDriving = false;
             this.isSlowingDown = false;
-            clearInterval(this.timerSlowDownId)
-            console.log(`Vehicle is stopped. Maximum speed during the drive was ${this.maxSpeedPerTrip}`);
+            clearInterval(this.timerSlowDownId);
+            this.message();
             this.maxSpeedPerTrip = 0;
         }
     }, 1500);
 };
 
-const car = new Vehicle("green", "disel");
+/*const car = new Vehicle("green", "disel");
 car.drive();
 console.log("go");
 setTimeout(() => {
@@ -87,4 +91,39 @@ setTimeout(() => {
 
 setTimeout(() => {
     car.stop();
-}, 13500);
+}, 13500);*/
+
+function Car(model, color, engine) {
+    Vehicle.call(this, color, engine);
+    this.model = model;
+    this.maxSpeed = 80;
+};
+
+Car.prototype = Object.create(Vehicle.prototype);
+Car.prototype.constructor = Car;
+
+Car.prototype.message = function() {
+    console.log(`Car ${this.model} is stopped. Maximum speed during the drive ${this.maxSpeedPerTrip}`);
+};
+
+Car.prototype.changeColor = function(newColor) {
+    if(newColor !== this.color) {
+        this.color = newColor;
+    }
+};
+
+
+/*const car = new Car("BMW", "green", "disel");
+car.drive();
+console.log("go");
+setTimeout(() => {
+    car.stop();
+}, 11000);
+
+setTimeout(() => {
+    car.drive();
+}, 9000);
+
+setTimeout(() => {
+    car.stop();
+}, 13500);*/
