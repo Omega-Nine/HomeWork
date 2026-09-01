@@ -21,6 +21,9 @@ Vehicle.prototype.getInfo = function() {
     return {engine: this.engine, color: this.color, maxSpeed: this.maxSpeed, model: this.model };
 };
 
+Vehicle.prototype.messageDrive = function() {};
+Vehicle.prototype.checkSpeed = function() {};
+
 Vehicle.prototype.drive = function() {
     if(this.isSlowingDown === true) {
         clearInterval(this.timerSlowDownId);
@@ -32,25 +35,27 @@ Vehicle.prototype.drive = function() {
     } 
     
     this.isDriving = true;
+    this.messageDrive();
 
     this.timerDriveId = setInterval(() => {
                     this.speed += 20;
-                      if(this.speed > this.maxSpeed) {
+                    if(this.speed > this.maxSpeed) {
                         console.log("speed is too high, SLOW DOWN!");
                     }
 
                     if(this.speed > this.maxSpeedPerTrip) {
                         this.maxSpeedPerTrip = this.speed;
                     }
+                    this.checkSpeed();
     }, 2000);
 };
 
-Vehicle.prototype.message = function() {
+Vehicle.prototype.messageStop = function() {
     console.log(`Vehicle is stopped. Maximum speed during the drive was ${this.maxSpeedPerTrip}`);
 };
 
 Vehicle.prototype.stop = function() {
-    if(this.speed === 0) {
+    if(this.speed === 0 && this.isDriving === false) {
         return;
     }
 
@@ -64,6 +69,11 @@ Vehicle.prototype.stop = function() {
         clearInterval(this.timerDriveId); 
     }
 
+    if(this.speed === 0) {
+        this.isDriving = false;
+        return;
+    }
+
     this.isSlowingDown = true;
     
     this.timerSlowDownId = setInterval(() => {
@@ -72,7 +82,7 @@ Vehicle.prototype.stop = function() {
             this.isDriving = false;
             this.isSlowingDown = false;
             clearInterval(this.timerSlowDownId);
-            this.message();
+            this.messageStop();
             this.maxSpeedPerTrip = 0;
         }
     }, 1500);
@@ -102,7 +112,7 @@ function Car(model, color, engine) {
 Car.prototype = Object.create(Vehicle.prototype);
 Car.prototype.constructor = Car;
 
-Car.prototype.message = function() {
+Car.prototype.messageStop = function() {
     console.log(`Car ${this.model} is stopped. Maximum speed during the drive ${this.maxSpeedPerTrip}`);
 };
 
@@ -127,3 +137,36 @@ setTimeout(() => {
 setTimeout(() => {
     car.stop();
 }, 13500);*/
+
+function Motorcycle(model, color, engine) {
+    Vehicle.call(this,color, engine);
+    this.model = model;
+    this.maxSpeed = 90;
+};
+
+Motorcycle.prototype = Object.create(Vehicle.prototype);
+Motorcycle.prototype.constructor = Motorcycle;
+
+Motorcycle.prototype.messageStop = function() {
+    console.log(`Motorcycle ${this.model} is stopped. Good drive`);
+};
+
+Motorcycle.prototype.messageDrive = function() {
+    console.log("Let's drive");
+};
+Motorcycle.prototype.checkSpeed = function() {
+    if(this.speed - this.maxSpeed >= 30) {
+       console.log("Engine overheating");
+       this.stop();
+    }
+};
+
+const testVehicle = new Vehicle("white", "diesel");
+
+testVehicle.drive();
+testVehicle.stop();
+
+setTimeout(() => {
+    console.log("speed:", testVehicle.speed);
+    console.log("isDriving:", testVehicle.isDriving);
+}, 3000);
